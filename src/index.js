@@ -1,18 +1,30 @@
 const path = require('path')
+const http = require('http')
 const express = require('express')
+const socketio = require('socket.io')
 
 const app = express()
+const server = http.createServer(app)
+const io = socketio(server)
 
 port = process.env.PORT || 3000
-
-//To join files, use path.join with 2 arguments: __dirname, and directory you want to join
 const publicDirectoryPath = path.join(__dirname, '../public')
 
-//express.static middleware serves up contents of the file 
+// express.static middleware serves up contents of the file 
 app.use(express.static(publicDirectoryPath))
 
-app.listen(port, () => {
-    console.log('Server is up on ' + port)
+io.on('connection', (socket) => {
+    console.log('New WebSocket connection')
+
+    socket.emit('message', 'Welcome user!')
+
+    socket.on('sendMessage', (message) => {
+        io.emit('message', message)
+    })
+})
+
+server.listen(port, () => {
+    console.log(`Server is up on ${port}!`)
 })
 
 
