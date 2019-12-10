@@ -5,11 +5,19 @@ const $messageForm = document.querySelector('#sendMessage')
 const $messageFormInput = $messageForm.querySelector('input')
 const $messageFormButton = $messageForm.querySelector('button')
 const $locationButton = document.querySelector('#send-location')
+const $messages = document.querySelector('#messages')
 
-
+//Templates
+const messageTemplate = document.querySelector('#message-template').innerHTML
 
 socket.on('message', (message) => {
     console.log(message)
+    // Mustache takes the content of html (which is message) and inserts it into the $messages div 
+    const html = Mustache.render(messageTemplate, {
+        message
+    })
+    $messages.insertAdjacentHTML('beforeend', html)
+
 })
 
 // e.preventDefault() keeps the console from refreshing. 
