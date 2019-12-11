@@ -18,10 +18,17 @@
 
     <button id="send-location">Send location</button>
 
-    <!--Mustache template script-->
+    <!--Mustache template-->
     <script id="message-template" type="text/html">
         <div>
-            <p>{{message}}</p>
+            <p>{{createdAt}} - {{message}}</p>
+        </div>
+    </script>
+
+    <!--Mustache template-->
+    <script id="location-url" type="text/html">
+        <div>
+            <p><a href="{{url}}" target="_blank">My current location</a></p>
         </div>
     </script>
 

@@ -9,18 +9,27 @@ const $messages = document.querySelector('#messages')
 
 //Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
+const locationURL = document.querySelector('#location-url').innerHTML
 
 socket.on('message', (message) => {
     console.log(message)
-    // Mustache takes the content of html (which is message) and inserts it into the $messages div 
+    // Mustache.render takes in 2 arguments: the template ID and the contents to render. 
     const html = Mustache.render(messageTemplate, {
-        message
+        message: message.text,
+        createdAt: moment(message.createdAt).format('h:mm a')
     })
     $messages.insertAdjacentHTML('beforeend', html)
-
 })
 
-// e.preventDefault() keeps the console from refreshing. 
+socket.on('locationMessage', (url) => {
+    console.log(url)
+    const html = Mustache.render(locationURL, {
+        url
+    })
+    $messages.insertAdjacentHTML('beforeend', html)
+})
+
+// e.preventDefault() keeps the console from refreshing
 $messageForm.addEventListener('submit', (e) => {
     e.preventDefault()
 
