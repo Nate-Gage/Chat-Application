@@ -2,42 +2,58 @@
 <html>
 
 <head>
-
+    <title>Chat App</title>
+    <link rel="icon" href="./img/favicon.png">
+    <link rel="stylesheet" href="./css/styles.min.css">
 </head>
 
 
 <body>
-    Chat App
+    <div class="chat">
+        <div class="chat__sidebar"></div>
+        <div class="chat__main">
+            <div id="messages" class="chat__messages"></div>
 
-    <div id="messages"></div>
-
-    <form id="sendMessage">
-        <input name="message" placeholder="Message here">
-        <button>Submit</button>
-    </form>
-
-    <button id="send-location">Send location</button>
+            <div class="compose">
+                <form id="sendMessage">
+                    <input name="message" placeholder="Message here">
+                    <button>Submit</button>
+                </form>
+                <button id="send-location">Send location</button>
+            </div>
+        </div>
+    </div>
 
     <!--Mustache template-->
     <script id="message-template" type="text/html">
-        <div>
-            <p>{{createdAt}} - {{message}}</p>
+        <div class="message">
+            <p>
+            <span class="message__name">Example Username</span>
+            <span class="message__meta">{{createdAt}}</span>
+            </p>
+            <p>{{message}}</p>
         </div>
     </script>
 
     <!--Mustache template-->
     <script id="message-error" type="text/html">
-        <div>
-            <p>{{createdAt}} - {{message}}</p>
+        <div class="message">
+            <p>
+                <span class="message__name">Example Username</span>
+                <span class="message__meta">{{createdAt}}</span>
+            </p>
+            <p>{{message}}</p>
         </div>
     </script>
 
     <!--Mustache template-->
     <script id="location-url" type="text/html">
-        <div>
-            <p>{{createdAt}} - 
-                <a href="{{url}}" target="_blank">My current location</a>
+        <div class="message">
+            <p>
+                <span class="message__name">Example Username</span>
+                <span class="message__meta">{{createdAt}}</span>
             </p>
+            <p><a href="{{url}}" target="_blank">My current location</a></p>
         </div>
     </script>
 
