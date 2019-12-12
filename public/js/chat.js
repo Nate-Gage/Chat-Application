@@ -9,6 +9,7 @@ const $messages = document.querySelector('#messages')
 
 //Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
+const messageError = document.querySelector('#message-error').innerHTML
 const locationURL = document.querySelector('#location-url').innerHTML
 
 socket.on('message', (message) => {
@@ -38,16 +39,18 @@ $messageForm.addEventListener('submit', (e) => {
 
     const message = e.target.elements.message.value
 
-    socket.emit('sendMessage', message, (error) => {
+    socket.emit('sendMessage', message, (callback) => {
         $messageFormButton.removeAttribute('disabled')
         $messageFormInput.value = ''
         $messageFormInput.focus()
 
-        if (error) {
-            return console.log(error)
-        }
-
-        console.log('Message has been delivered.')
+        if (callback === "Profanity is not allowed") {
+            const htmlError = Mustache.render(messageError, {
+                message: 'Stop swearing!',
+                createdAt: moment(message.createdAt).format('h:mm a')
+            })
+            $messages.insertAdjacentHTML('beforeend', htmlError)
+        } 
     })
 })
 
