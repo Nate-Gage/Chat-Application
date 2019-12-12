@@ -25,8 +25,8 @@
         </div>
     </script>
 
-       <!--Mustache template-->
-       <script id="message-error" type="text/html">
+    <!--Mustache template-->
+    <script id="message-error" type="text/html">
         <div>
             <p>{{createdAt}} - {{message}}</p>
         </div>
@@ -35,7 +35,9 @@
     <!--Mustache template-->
     <script id="location-url" type="text/html">
         <div>
-            <p><a href="{{url}}" target="_blank">My current location</a></p>
+            <p>{{createdAt}} - 
+                <a href="{{url}}" target="_blank">My current location</a>
+            </p>
         </div>
     </script>
 
